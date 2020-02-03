@@ -13,7 +13,7 @@ class Guild extends Base {
         this.Id = guild ? guild.Id : null;
         this.Name = guild ? guild.Name : null;
         this.DiscordId = guild ? guild.DiscordId : null;
-        this.OwnerId = guild ? guild.Ownerid: null;
+        this.OwnerId = guild ? guild.OwnerId: null;
     }
 }
 

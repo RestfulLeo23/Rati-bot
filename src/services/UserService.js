@@ -20,12 +20,16 @@ class UserService extends BaseService {
         this.client.on('guildMemberUpdate', (oldMember, newMember) => {
             logger.Trace(`user received guildMemeberUpdate`);
             logger.Info(`guildMemberUpdate: ${newMember.user["username"]}`);
-            this.updateUser(newMember, newMember);
+            if(!newMember.user.bot){
+                this.updateUser(newMember, newMember);
+            }
         });
         this.client.on('guildMemberRemove', (guildMember) => {
             logger.Trace(`user received guildMemberRemove`);
             logger.Info(`guildMemberRemove: ${guildMember.user["username"]}`);
-            this.removeUser(guildMember);
+            if(!guildMember.user.bot){
+                this.removeUser(guildMember);
+            }
         });
     }
     
@@ -135,7 +139,7 @@ class UserService extends BaseService {
         user.NickName = guildUser.nickname ? guildUser.nickname : guildUser.user["username"];
         user.UserName = guildUser.user["username"];
         const guild = new Guild({
-            Name = guildUser.guild.Name,
+            Name: guildUser.guild.Name,
         });
 
         return super.getById(User, [[user.DiscordId], [user.GuildId]], ["DiscordId","GuildId"])
