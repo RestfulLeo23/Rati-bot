@@ -41,7 +41,7 @@ checkAlive();
 function checkAlive(){
   logger.Debug(`rati checkAlive`);
 
-  if(client.guilds.size === 0) {
+  if(client.guilds.cache.size == 0) {
     try{
       logger.Info(`Couldn't connect, trying to login.`)
       client.login(token);
